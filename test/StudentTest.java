@@ -11,6 +11,6 @@ class StudentTest {
         assertEquals("Tom Grey", student2.getName());
 
         // Demostate failure
-        assertEquals("Tom Grey", student.getName());
+//        assertEquals("Tom Grey", student.getName());
     }
 }

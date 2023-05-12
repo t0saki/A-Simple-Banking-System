@@ -7,7 +7,7 @@ class JuniorAccountTest {
 
     @Test
     void testWithdraw(){
-        JuniorAccount junior1 = new JuniorAccount(1, "John Doe", 1000, 15);
+        JuniorAccount junior1 = new JuniorAccount(1, "John Doe", "London", 1000, 15);
         junior1.withdraw(50);
         assertEquals(950, junior1.getBalance());
         junior1.withdraw(70);

@@ -3,8 +3,8 @@ public class JuniorAccount extends BankAccount {
     private final int MAX_WITHDRAWAL = 100;
     private int withdrawalToday = 0;
 
-    public JuniorAccount(int accountNumber, String accountName, double balance, int age) {
-        super(accountNumber, accountName, balance);
+    public JuniorAccount(int accountNumber, String accountName, String location, double balance, int age) {
+        super(accountNumber, accountName, location, balance);
         this.age = age;
         if (this.age > 16) {
             System.out.println("Age is above 16, may not be a junior account.");
