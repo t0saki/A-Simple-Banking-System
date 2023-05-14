@@ -152,6 +152,23 @@ public class BaseHandler {
         return -1;
     }
 
+    public int getLast(String header, String val) {
+        if (fileReader == null) {
+            System.out.println("getLatestRowIndexByHeaderAndVal(): You should open a file before reading from it.");
+            return -1;
+        }
+
+        int columnIndex = headerMap.get(header);
+
+        for (int rowIndex = lineCount - 1; rowIndex >= 0; rowIndex--) {
+            if (fileData[rowIndex][columnIndex].equals(val)) {
+                return rowIndex;
+            }
+        }
+
+        return -1;
+    }
+
     public String getElement(String header, int rowIndex) {
         if (fileReader == null) {
             System.out.println("getElement(): You should open a file before reading from it.");
@@ -196,7 +213,7 @@ public class BaseHandler {
         }
 
         int columnIndex = headerMap.get(header);
-        int rowIndex = getFirstRowIndexByHeaderAndVal(header, val);
+        int rowIndex = getLast(header, val);
         if (rowIndex == -1) {
             System.out.println("deleteRecord(): Record not found.");
             return 1;
@@ -212,7 +229,7 @@ public class BaseHandler {
 
         // write the new data to the file
         try {
-            fileWriter = new FileWriter(new File("src\\Data\\User.csv"));
+            fileWriter = new FileWriter(new File("src\\Data\\BankAccount.csv"));
             fileWriter.write(String.join(",", headers) + "\n");
             for (int i = 0; i < lineCount; i++) {
                 fileWriter.write(String.join(",", fileData[i]) + "\n");

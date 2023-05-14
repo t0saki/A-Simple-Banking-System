@@ -48,7 +48,7 @@ public class ClientLogin {
                     System.out.println("Login successful!");
                     JOptionPane.showMessageDialog(null, "Login successful!");
                     frame.dispose();
-                    new ClientMenu();
+                    new ClientMenu(bank, accountNumber);
                 }
                 case 1 -> JOptionPane.showMessageDialog(null, "Username does not exist!");
                 case 2 -> JOptionPane.showMessageDialog(null, "Wrong password!");

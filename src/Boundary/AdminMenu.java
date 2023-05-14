@@ -1,16 +1,15 @@
 package Boundary;
 
-
 import Control.Bank;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu {
+public class AdminMenu {
+
     JFrame frame;
     Bank bank;
-
-    public Menu(Bank bank) {
+    public AdminMenu(Bank bank) {
         this.bank = bank;
         frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,7 +20,7 @@ public class Menu {
         // 2 buttons, client or admin, in the center of the screen, fixed size
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 50)); // Set the layout and gaps between buttons
-        JButton clientButton = new JButton("CLIENT");
+        JButton clientButton = new JButton("Register");
 //        clientButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 //        clientButton.setSize(200, 100);
         // Set the font size and padding of the buttons
@@ -32,12 +31,12 @@ public class Menu {
 
         clientButton.addActionListener(e -> {
             frame.dispose();
-            new ClientLogin(bank);
+            new RegisterMenu(bank);
         });
         panel.add(clientButton);
 
 
-        JButton adminButton = new JButton("ADMIN");
+        JButton adminButton = new JButton("Exit");
         adminButton.setFont(buttonFont);
         adminButton.setMargin(new java.awt.Insets(20, 20, 20, 20));
         adminButton.setSize(200, 100);
@@ -46,10 +45,9 @@ public class Menu {
 //        adminButton.setSize(200, 100);
         adminButton.addActionListener(e -> {
             frame.dispose();
-            new AdminMenu(bank);
+            new Menu(new Bank());
         });
         panel.add(adminButton);
-
 
 
         frame.add(panel);

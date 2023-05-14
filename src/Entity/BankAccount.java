@@ -6,14 +6,15 @@ import Control.RamdomIDGenerator;
 import static Control.HashHandler.hashPassword;
 
 public class BankAccount {
-    private int accountNumber;
-    private String accountName;
-    private String location;
-    private String hashedPIN;
-    private double balance;
-    private double unClearedBalance;
-    private boolean suspended;
-    private int type = 0;
+    public int accountNumber;
+    public String accountName;
+    public String location;
+    public String hashedPIN;
+    public int PIN;
+    public double balance;
+    public double unClearedBalance;
+    public boolean suspended;
+    public int type = 0;
 
     public BankAccount(int accountNumber, String accountName, String location, double balance) {
         this.accountNumber = accountNumber;
@@ -25,14 +26,14 @@ public class BankAccount {
         int PIN = generatePIN();
         System.out.println("Account created successfully, Account Number: " + accountNumber + ", PIN: " + PIN);
         this.hashedPIN = hashPassword(PIN);
-//        appendFile();
+        // appendFile();
     }
 
     public BankAccount(int accountNumber) {
         // load from file
         BaseHandler baseHandler = new BaseHandler();
         baseHandler.open("src\\Data\\BankAccount.csv");
-        int lineCount = baseHandler.getFirstRowIndexByHeaderAndVal("accountNumber", String.valueOf(accountNumber));
+        int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
         if (lineCount == -1) {
             System.out.println("Account not found.");
         } else {
@@ -50,7 +51,7 @@ public class BankAccount {
     public int updateFile() {
         BaseHandler baseHandler = new BaseHandler();
         baseHandler.open("src\\Data\\BankAccount.csv");
-        int lineCount = baseHandler.getFirstRowIndexByHeaderAndVal("accountNumber", String.valueOf(accountNumber));
+        int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
         if (lineCount == -1) {
             System.out.println("Account not found.");
             return 1;
@@ -62,7 +63,7 @@ public class BankAccount {
         }
     }
 
-    public int appendFile(){
+    public int appendFile() {
         BaseHandler baseHandler = new BaseHandler();
         baseHandler.open("src\\Data\\BankAccount.csv");
         String[] headerData = getHeader();
@@ -72,12 +73,15 @@ public class BankAccount {
         return 0;
     }
 
-    private String[] getHeader() {
-        return new String[]{"accountNumber", "accountName", "location", "hashedPIN", "balance", "unClearedBalance", "suspended", "type"};
+    public String[] getHeader() {
+        return new String[] { "accountNumber", "accountName", "location", "hashedPIN", "balance", "unClearedBalance",
+                "suspended", "type" };
     }
 
-    private String[] getRecord() {
-        return new String[]{String.valueOf(getAccountNumber()), getAccountName(), getLocation(), getHashedPIN(), String.valueOf(getBalance()), String.valueOf(getUnClearedBalance()), String.valueOf(isSuspended()), String.valueOf(getType())};
+    public String[] getRecord() {
+        return new String[] { String.valueOf(getAccountNumber()), getAccountName(), getLocation(), getHashedPIN(),
+                String.format("%.2f", getBalance()), String.format("%.2f", getUnClearedBalance()),
+                String.valueOf(isSuspended()), String.valueOf(getType()) };
     }
 
     public int getType() {
@@ -96,8 +100,12 @@ public class BankAccount {
         return hashedPIN;
     }
 
-    private int generatePIN() {
-        return RamdomIDGenerator.generate(4);
+    public int getPIN() {
+        return PIN;
+    }
+
+    public int generatePIN() {
+        return PIN = RamdomIDGenerator.generate(6);
     }
 
     public int getAccountNumber() {
@@ -166,7 +174,7 @@ public class BankAccount {
     }
 
     public void suspend() {
-        suspended = true;
+        suspended = !suspended;
     }
 
     public void reinstate() {
@@ -174,10 +182,10 @@ public class BankAccount {
     }
 
     public int closeAccount() {
-        if (!suspended&&balance==0) {
+        if (!suspended && balance == 0) {
             BaseHandler baseHandler = new BaseHandler();
             baseHandler.open("src\\Data\\BankAccount.csv");
-            int lineCount = baseHandler.getFirstRowIndexByHeaderAndVal("accountNumber", String.valueOf(accountNumber));
+            int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
             if (lineCount == -1) {
                 System.out.println("Account not found.");
                 baseHandler.close();
@@ -192,5 +200,21 @@ public class BankAccount {
             System.out.println("Close account failed: account is suspended or balance is not zero.");
             return 1;
         }
+    }
+
+    public String getTypeByString() {
+        int type = getType();
+        return switch (type) {
+            case 0 -> "Bank Account";
+            case 1 -> "Current Account";
+            case 2 -> "Saving Account";
+            case 3 -> "Student Account";
+            default -> "Unknown";
+        };
+    }
+
+    public int nextDay() {
+        clearFunds();
+        return 0;
     }
 }
