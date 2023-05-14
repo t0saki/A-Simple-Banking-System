@@ -1,3 +1,5 @@
+package Entity;
+
 public class Student {
     private String name;
 

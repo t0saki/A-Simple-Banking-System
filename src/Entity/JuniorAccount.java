@@ -1,3 +1,5 @@
+package Entity;
+
 public class JuniorAccount extends BankAccount {
     private int age;
     private final int MAX_WITHDRAWAL = 100;

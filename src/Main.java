@@ -1,13 +1,23 @@
+import Boundary.Menu;
+import Control.Bank;
+import Entity.BankAccount;
+import Entity.JuniorAccount;
+
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        JuniorAccount junior1 = new JuniorAccount(1, "John Doe", "London", 1000, 15);
-        junior1.checkBalance();
-        junior1.withdraw(50);
-        junior1.checkBalance();
-        junior1.withdraw(70);
-        junior1.checkBalance();
-        junior1.clearWithdrawalToday();
-        junior1.withdraw(70);
-        junior1.checkBalance();
+        // JFrame style to match the OS
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        BankAccount ba = new BankAccount(2, "Tim", "Singapore", 1000);
+//        ba.appendFile();
+        // 2 4389
+
+        Menu menu = new Menu(new Bank());
     }
 }

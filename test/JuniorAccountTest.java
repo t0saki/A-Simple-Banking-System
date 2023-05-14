@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.BeforeEach;
+import Entity.JuniorAccount;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

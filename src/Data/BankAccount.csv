@@ -1,0 +1,3 @@
+﻿,accountNumber,accountName,location,hashedPIN,balance,unClearedBalance,suspended,type,overdraftLimit,age,withdrawalToday
+,1,John,Beijing,40dd2b010d461c24e48783a18bd6d051d7e24c8b32079bb913a27860f83295e9,1000,0,false,0,0,0,0
+,2,Tim,Singapore,93617fe8e8b35100a931faa3299d2301458a42aa6f9c137271ef191f20860c8b,1000.0,0.0,false,0,,,
