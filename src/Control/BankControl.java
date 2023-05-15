@@ -6,16 +6,14 @@ import Entity.JuniorAccount;
 import Entity.SaverAccount;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import static Control.HashHandler.checkPassword;
+import static Control.HashControl.checkPassword;
 
-public class Bank {
+public class BankControl {
     // private ArrayList<BankAccount> accounts;
     // private HashMap<Integer, BankAccount> accounts;
 
-    public Bank() {
+    public BankControl() {
         // accounts = new HashMap<>();
     }
 
@@ -68,14 +66,14 @@ public class Bank {
     }
 
     public BankAccount getAccount(int accountNumber) {
-        BaseHandler baseHandler = new BaseHandler();
-        baseHandler.open("src\\Data\\BankAccount.csv");
-        int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
+        FileControl fileControl = new FileControl();
+        fileControl.open("src\\Data\\BankAccount.csv");
+        int lineCount = fileControl.getLast("accountNumber", String.valueOf(accountNumber));
         if (lineCount == -1) {
             System.out.println("Account not found.");
             return null;
         } else {
-            int type = Integer.parseInt(baseHandler.getElement("type", lineCount));
+            int type = Integer.parseInt(fileControl.getElement("type", lineCount));
             switch (type) {
                 case 1 -> {
                     return new SaverAccount(accountNumber);
@@ -96,22 +94,22 @@ public class Bank {
 
     public int checkLogin(int accountNumber, int PIN) {
         System.out.println("checkLogin");
-        BaseHandler baseHandler = new BaseHandler();
-        baseHandler.open("src\\Data\\BankAccount.csv");
-        int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
+        FileControl fileControl = new FileControl();
+        fileControl.open("src\\Data\\BankAccount.csv");
+        int lineCount = fileControl.getLast("accountNumber", String.valueOf(accountNumber));
         if (lineCount == -1) {
-            baseHandler.close();
+            fileControl.close();
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             // JOptionPane.showMessageDialog(dialog, "Account number not found.");
             return 1;
         }
-        String hashedPIN = baseHandler.getElement("hashedPIN", lineCount);
+        String hashedPIN = fileControl.getElement("hashedPIN", lineCount);
         if (checkPassword(PIN, hashedPIN)) {
-            baseHandler.close();
+            fileControl.close();
             return 0;
         } else {
-            baseHandler.close();
+            fileControl.close();
             JDialog dialog = new JDialog();
             dialog.setAlwaysOnTop(true);
             // JOptionPane.showMessageDialog(dialog, "Wrong PIN.");

@@ -14,7 +14,7 @@ import java.util.Map;
  * and written by our group.
  */
 
-public class BaseHandler {
+public class FileControl {
     private FileReader fileReader;
     private FileWriter fileWriter;
     private Map<String, Integer> headerMap;
@@ -22,7 +22,7 @@ public class BaseHandler {
     private String[][] fileData;
     private String[] headers = new String[1024];
 
-    public BaseHandler() {
+    public FileControl() {
         fileReader = null;
         headerMap = null;
         lineCount = 0;

@@ -1,7 +1,6 @@
 package Boundary;
 
-import Control.Bank;
-import Entity.BankAccount;
+import Control.BankControl;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,11 +11,11 @@ public class RegisterMenu extends JFrame {
     private JTextField accountNameField, locationField, balanceField, ageField;
     private JComboBox<String> typeBox;
     private JButton registerButton, exitButton;
-    private Bank bank;
+    private BankControl bankControl;
 
-    public RegisterMenu(Bank bank) {
+    public RegisterMenu(BankControl bankControl) {
         super("Register");
-        this.bank = bank;
+        this.bankControl = bankControl;
 
         // openAccount(String type, String accountName, String location, double balance, int age)
 
@@ -112,10 +111,10 @@ public class RegisterMenu extends JFrame {
                     JOptionPane.showMessageDialog(null, "Junior account must be under 16 years old!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else {
-                    result = bank.openAccount(type, accountName, location, balance, age);
+                    result = bankControl.openAccount(type, accountName, location, balance, age);
                 }
             } else {
-                result = bank.openAccount(type, accountName, location, balance);
+                result = bankControl.openAccount(type, accountName, location, balance);
             }
             if (result[0] >= 0) {
                 JOptionPane.showMessageDialog(null, "Register successfully!\n" +
@@ -124,7 +123,7 @@ public class RegisterMenu extends JFrame {
                         "Please remember your account number and PIN!\nIt will show only once!"
                         , "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
-                new Menu(bank);
+                new Menu(bankControl);
             } else {
                 // Error dialog
                 JOptionPane.showMessageDialog(this, "Error: Register failed!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -133,7 +132,7 @@ public class RegisterMenu extends JFrame {
 
         exitButton.addActionListener(e -> {
             dispose();
-            new Menu(bank);
+            new Menu(bankControl);
         });
 
 

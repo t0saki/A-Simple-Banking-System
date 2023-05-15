@@ -1,9 +1,9 @@
 package Entity;
 
-import Control.BaseHandler;
+import Control.FileControl;
 import Control.RamdomIDGenerator;
 
-import static Control.HashHandler.hashPassword;
+import static Control.HashControl.hashPassword;
 
 public class BankAccount {
     public int accountNumber;
@@ -31,45 +31,45 @@ public class BankAccount {
 
     public BankAccount(int accountNumber) {
         // load from file
-        BaseHandler baseHandler = new BaseHandler();
-        baseHandler.open("src\\Data\\BankAccount.csv");
-        int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
+        FileControl fileControl = new FileControl();
+        fileControl.open("src\\Data\\BankAccount.csv");
+        int lineCount = fileControl.getLast("accountNumber", String.valueOf(accountNumber));
         if (lineCount == -1) {
             System.out.println("Account not found.");
         } else {
             this.accountNumber = accountNumber;
-            this.accountName = baseHandler.getElement("accountName", lineCount);
-            this.location = baseHandler.getElement("location", lineCount);
-            this.hashedPIN = baseHandler.getElement("hashedPIN", lineCount);
-            this.balance = Double.parseDouble(baseHandler.getElement("balance", lineCount));
-            this.unClearedBalance = Double.parseDouble(baseHandler.getElement("unClearedBalance", lineCount));
-            this.suspended = Boolean.parseBoolean(baseHandler.getElement("suspended", lineCount));
-            this.type = Integer.parseInt(baseHandler.getElement("type", lineCount));
+            this.accountName = fileControl.getElement("accountName", lineCount);
+            this.location = fileControl.getElement("location", lineCount);
+            this.hashedPIN = fileControl.getElement("hashedPIN", lineCount);
+            this.balance = Double.parseDouble(fileControl.getElement("balance", lineCount));
+            this.unClearedBalance = Double.parseDouble(fileControl.getElement("unClearedBalance", lineCount));
+            this.suspended = Boolean.parseBoolean(fileControl.getElement("suspended", lineCount));
+            this.type = Integer.parseInt(fileControl.getElement("type", lineCount));
         }
     }
 
     public int updateFile() {
-        BaseHandler baseHandler = new BaseHandler();
-        baseHandler.open("src\\Data\\BankAccount.csv");
-        int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
+        FileControl fileControl = new FileControl();
+        fileControl.open("src\\Data\\BankAccount.csv");
+        int lineCount = fileControl.getLast("accountNumber", String.valueOf(accountNumber));
         if (lineCount == -1) {
             System.out.println("Account not found.");
             return 1;
         } else {
-            baseHandler.deleteRecord("accountNumber", String.valueOf(accountNumber));
-            baseHandler.close();
+            fileControl.deleteRecord("accountNumber", String.valueOf(accountNumber));
+            fileControl.close();
             appendFile();
             return 0;
         }
     }
 
     public int appendFile() {
-        BaseHandler baseHandler = new BaseHandler();
-        baseHandler.open("src\\Data\\BankAccount.csv");
+        FileControl fileControl = new FileControl();
+        fileControl.open("src\\Data\\BankAccount.csv");
         String[] headerData = getHeader();
         String[] recordData = getRecord();
-        baseHandler.addRecord(headerData, recordData);
-        baseHandler.close();
+        fileControl.addRecord(headerData, recordData);
+        fileControl.close();
         return 0;
     }
 
@@ -183,16 +183,16 @@ public class BankAccount {
 
     public int closeAccount() {
         if (!suspended && balance == 0) {
-            BaseHandler baseHandler = new BaseHandler();
-            baseHandler.open("src\\Data\\BankAccount.csv");
-            int lineCount = baseHandler.getLast("accountNumber", String.valueOf(accountNumber));
+            FileControl fileControl = new FileControl();
+            fileControl.open("src\\Data\\BankAccount.csv");
+            int lineCount = fileControl.getLast("accountNumber", String.valueOf(accountNumber));
             if (lineCount == -1) {
                 System.out.println("Account not found.");
-                baseHandler.close();
+                fileControl.close();
                 return 1;
             } else {
-                baseHandler.deleteRecord("accountNumber", String.valueOf(accountNumber));
-                baseHandler.close();
+                fileControl.deleteRecord("accountNumber", String.valueOf(accountNumber));
+                fileControl.close();
             }
             System.out.println("Account closed successfully.");
             return 0;

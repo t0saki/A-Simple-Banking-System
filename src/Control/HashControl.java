@@ -3,7 +3,7 @@ package Control;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class HashHandler {
+public class HashControl {
 
     public static String hashPassword(String password) {
         try {

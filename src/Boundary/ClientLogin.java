@@ -1,16 +1,15 @@
 package Boundary;
 
-import Control.Bank;
+import Control.BankControl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class ClientLogin {
     JFrame frame;
-    Bank bank;
-    public ClientLogin(Bank bank) {
-        this.bank = bank;
+    BankControl bankControl;
+    public ClientLogin(BankControl bankControl) {
+        this.bankControl = bankControl;
         System.out.println("ClientLogin");
 
         frame = new JFrame("Client Login");
@@ -43,12 +42,12 @@ public class ClientLogin {
                 sPID.append(c);
             }
             int PID = Integer.parseInt(sPID.toString());
-            switch (bank.checkLogin(accountNumber, PID)) {
+            switch (bankControl.checkLogin(accountNumber, PID)) {
                 case 0 -> {
                     System.out.println("Login successful!");
                     JOptionPane.showMessageDialog(null, "Login successful!");
                     frame.dispose();
-                    new ClientMenu(bank, accountNumber);
+                    new ClientMenu(bankControl, accountNumber);
                 }
                 case 1 -> JOptionPane.showMessageDialog(null, "Username does not exist!");
                 case 2 -> JOptionPane.showMessageDialog(null, "Wrong password!");
@@ -60,7 +59,7 @@ public class ClientLogin {
         panel.add(cancelButton);
         cancelButton.addActionListener(e -> {
             frame.dispose();
-            new Menu(new Bank());
+            new Menu(new BankControl());
         });
 
         frame.add(panel);

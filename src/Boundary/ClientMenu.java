@@ -1,19 +1,19 @@
 package Boundary;
 
-import Control.Bank;
+import Control.BankControl;
 import Entity.BankAccount;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ClientMenu {
-    Bank bank;
+    BankControl bankControl;
     BankAccount account;
     JFrame frame;
 
-    public ClientMenu(Bank bank, int accountNumber) {
-        this.bank = bank;
-        this.account = bank.getAccount(accountNumber);
+    public ClientMenu(BankControl bankControl, int accountNumber) {
+        this.bankControl = bankControl;
+        this.account = bankControl.getAccount(accountNumber);
 
         // Create a frame
         frame = new JFrame("Client Menu");
@@ -131,7 +131,7 @@ public class ClientMenu {
         button6.addActionListener(e -> {
             if (account.getBalance() >= 0) {
                 frame.dispose();
-                new Menu(new Bank());
+                new Menu(new BankControl());
             } else {
                 JOptionPane.showMessageDialog(frame, "Account balance is negative.");
             }

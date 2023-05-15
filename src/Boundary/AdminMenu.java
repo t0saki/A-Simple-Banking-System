@@ -1,6 +1,6 @@
 package Boundary;
 
-import Control.Bank;
+import Control.BankControl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +8,9 @@ import java.awt.*;
 public class AdminMenu {
 
     JFrame frame;
-    Bank bank;
-    public AdminMenu(Bank bank) {
-        this.bank = bank;
+    BankControl bankControl;
+    public AdminMenu(BankControl bankControl) {
+        this.bankControl = bankControl;
         frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
@@ -31,7 +31,7 @@ public class AdminMenu {
 
         clientButton.addActionListener(e -> {
             frame.dispose();
-            new RegisterMenu(bank);
+            new RegisterMenu(bankControl);
         });
         panel.add(clientButton);
 
@@ -45,7 +45,7 @@ public class AdminMenu {
 //        adminButton.setSize(200, 100);
         adminButton.addActionListener(e -> {
             frame.dispose();
-            new Menu(new Bank());
+            new Menu(new BankControl());
         });
         panel.add(adminButton);
 

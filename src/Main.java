@@ -1,7 +1,5 @@
 import Boundary.Menu;
-import Control.Bank;
-import Entity.BankAccount;
-import Entity.JuniorAccount;
+import Control.BankControl;
 
 import javax.swing.*;
 
@@ -18,6 +16,6 @@ public class Main {
 //        ba.appendFile();
         // 2 4389
 
-        Menu menu = new Menu(new Bank());
+        Menu menu = new Menu(new BankControl());
     }
 }
