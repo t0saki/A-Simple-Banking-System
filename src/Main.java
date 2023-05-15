@@ -12,10 +12,6 @@ public class Main {
             e.printStackTrace();
         }
 
-//        BankAccount ba = new BankAccount(2, "Tim", "Singapore", 1000);
-//        ba.appendFile();
-        // 2 4389
-
         MainMenu mainMenu = new MainMenu(new BankControl());
     }
 }
