@@ -123,7 +123,7 @@ public class RegisterMenu extends JFrame {
                         "Please remember your account number and PIN!\nIt will show only once!"
                         , "Success", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
-                new Menu(bankControl);
+                new MainMenu(bankControl);
             } else {
                 // Error dialog
                 JOptionPane.showMessageDialog(this, "Error: Register failed!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -132,7 +132,7 @@ public class RegisterMenu extends JFrame {
 
         exitButton.addActionListener(e -> {
             dispose();
-            new Menu(bankControl);
+            new MainMenu(bankControl);
         });
 
 

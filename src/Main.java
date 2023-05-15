@@ -1,4 +1,4 @@
-import Boundary.Menu;
+import Boundary.MainMenu;
 import Control.BankControl;
 
 import javax.swing.*;
@@ -16,6 +16,6 @@ public class Main {
 //        ba.appendFile();
         // 2 4389
 
-        Menu menu = new Menu(new BankControl());
+        MainMenu mainMenu = new MainMenu(new BankControl());
     }
 }

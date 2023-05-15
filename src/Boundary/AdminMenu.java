@@ -45,7 +45,7 @@ public class AdminMenu {
 //        adminButton.setSize(200, 100);
         adminButton.addActionListener(e -> {
             frame.dispose();
-            new Menu(new BankControl());
+            new MainMenu(new BankControl());
         });
         panel.add(adminButton);
 

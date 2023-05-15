@@ -131,7 +131,7 @@ public class ClientMenu {
         button6.addActionListener(e -> {
             if (account.getBalance() >= 0) {
                 frame.dispose();
-                new Menu(new BankControl());
+                new MainMenu(new BankControl());
             } else {
                 JOptionPane.showMessageDialog(frame, "Account balance is negative.");
             }

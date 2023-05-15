@@ -6,11 +6,11 @@ import Control.BankControl;
 import javax.swing.*;
 import java.awt.*;
 
-public class Menu {
+public class MainMenu {
     JFrame frame;
     BankControl bankControl;
 
-    public Menu(BankControl bankControl) {
+    public MainMenu(BankControl bankControl) {
         this.bankControl = bankControl;
         frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

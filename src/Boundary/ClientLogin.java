@@ -59,7 +59,7 @@ public class ClientLogin {
         panel.add(cancelButton);
         cancelButton.addActionListener(e -> {
             frame.dispose();
-            new Menu(new BankControl());
+            new MainMenu(new BankControl());
         });
 
         frame.add(panel);

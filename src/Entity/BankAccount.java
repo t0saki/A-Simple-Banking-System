@@ -177,10 +177,6 @@ public class BankAccount {
         suspended = !suspended;
     }
 
-    public void reinstate() {
-        suspended = false;
-    }
-
     public int closeAccount() {
         if (!suspended && balance == 0) {
             FileControl fileControl = new FileControl();
